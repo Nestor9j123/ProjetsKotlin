@@ -1,12 +1,12 @@
 package com.example.base
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -36,8 +36,13 @@ class MainActivity : AppCompatActivity() {
                 val emailco= "Nestor@gmail.com"
                 val passwordco= "123456"
                 if(testEmail == emailco && testPassword == passwordco){
+                    email.setText("")
+                    password.setText("")
+                    Intent(this, HomeActivity::class.java).also {
+                        it.putExtra("email", testEmail)
+                        startActivity(it)
+                    }
 
-                    Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
                 }else {
                     error.text = "Email ou le password n'est pas coorecte "
                     error.visibility = View.VISIBLE
@@ -47,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.hello)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets

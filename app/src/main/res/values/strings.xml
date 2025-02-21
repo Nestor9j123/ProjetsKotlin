@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">FoodQuick</string>
+    <string name="accueil_name">Acceuil</string>
+    <string-array name="poste">
+        <item>Serveur</item>
+        <item>Livreur</item>
+        <item>Cuisinier</item>
+        <item>Chandelier</item>
+        <item>Assistant</item>
+
+    </string-array>
 </resources>
