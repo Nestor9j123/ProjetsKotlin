@@ -9,13 +9,14 @@
     android:padding="20dp"
     tools:context=".MainActivity">
 
-   <ImageView
-       android:layout_width="300dp"
-       android:layout_height="100dp"
-       android:src="@drawable/facebook"
-       android:layout_centerHorizontal="true"
-       android:layout_marginTop="80dp"
-       android:id="@+id/logo"/>
+ <ImageView
+     android:id="@+id/logo"
+     android:layout_width="300dp"
+     android:layout_height="100dp"
+     android:layout_alignParentTop="true"
+     android:layout_centerHorizontal="true"
+     android:layout_marginTop="165dp"
+     android:src="@drawable/facebook" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="45dp"

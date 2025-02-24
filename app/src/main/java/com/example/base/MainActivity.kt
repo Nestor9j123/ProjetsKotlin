@@ -3,14 +3,14 @@ package com.example.base
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -38,10 +38,11 @@ class MainActivity : AppCompatActivity() {
                 if(testEmail == emailco && testPassword == passwordco){
                     email.setText("")
                     password.setText("")
-                    Intent(this, HomeActivity::class.java).also {
-                        it.putExtra("email", testEmail)
-                        startActivity(it)
-                    }
+                    Log.d("DEBUG", "Avant le lancement de HomeActivity")
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.putExtra("email", testEmail)
+                    startActivity(intent)
+                    Log.d("DEBUG", "Après le lancement de HomeActivity")
 
                 }else {
                     error.text = "Email ou le password n'est pas coorecte "
@@ -51,13 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.hello)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-
-        }
 
     }
 }

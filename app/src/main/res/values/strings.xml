@@ -1,12 +1,22 @@
 <resources>
     <string name="app_name">FoodQuick</string>
     <string name="accueil_name">Acceuil</string>
+    <string name="connexion_name">Page de post</string>
+
+
     <string-array name="poste">
-        <item>Serveur</item>
-        <item>Livreur</item>
-        <item>Cuisinier</item>
-        <item>Chandelier</item>
-        <item>Assistant</item>
+        <item>Poste1</item>
+        <item>Poste2</item>
+        <item>Poste3</item>
+        <item>Poste4</item>
+        <item>Poste5</item>
+        <item>Poste6</item>
+        <item>Poste7</item>
+        <item>Poste8</item>
+        <item>Poste9</item>
+        <item>Poste10</item>
+        <item>Poste11</item>
+        <item>Poste12</item>
 
     </string-array>
 </resources>

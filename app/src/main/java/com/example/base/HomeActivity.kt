@@ -1,16 +1,23 @@
 package com.example.base
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.ListView
-import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-
+import androidx.appcompat.view.menu.MenuItemImpl
 
 class HomeActivity : AppCompatActivity() {
-    @SuppressLint("WrongViewCast", "MissingInflatedId")
+    lateinit var liste: ListView
+    var postearray = ArrayList<Post>()
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -18,17 +25,102 @@ class HomeActivity : AppCompatActivity() {
 
         val email = intent.getStringExtra("email")
 
-
         val liste = findViewById<ListView>(R.id.listePoste)
 
-        val postearray = listOf("Poste 1", "Poste 2", "Poste 3", "Poste 4", "Poste 5")
+        // Liste des postes
+        val postearray = arrayListOf(
+            Post(
+                "Titre1",
+                "Une descritption du post 1 en bas de cette page est une bonne pratique",
+                R.drawable.img1
+            ),
+            Post(
+                "Titre2",
+                "Une descritption du post 2 en bas de cette page est une bonne pratique",
+                R.drawable.img2
+            ),
+            Post(
+                "Titre3",
+                "Une descritption du post 3 en bas de cette page est une bonne pratique",
+                R.drawable.img3
+            ),
+            Post(
+                "Titre4",
+                "Une descritption du post 4 en bas de cette page est une bonne pratique",
+                R.drawable.img4
+            ),
+            Post(
+                "Titre5",
+                "Une descritption du post 5 en bas de cette page est une bonne pratique",
+                R.drawable.img5
+            ),
+        )
 
-
-        val adapt = ArrayAdapter(this, android.R.layout.simple_list_item_1, postearray)
+        // Utilisation du PostsAdapter personnalisé
+        val adapt = PostsAdapter(this, R.layout.itempost, postearray)
         liste.adapter = adapt
 
+        liste.setOnItemClickListener { parent, view, position, id ->
+            val poste = postearray[position]
+            val intent = Intent(this, PostdetailActivity2::class.java)
+            intent.putExtra("titre", poste.titre)
+            startActivity(intent)
+        }
+        registerForContextMenu(liste)
 
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.homemenu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.itemAdd -> {
+                Toast.makeText(this, "Ajouter", Toast.LENGTH_SHORT).show()
+
+            }
+
+            R.id.itemSet -> {
+                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show()
+
+            }
+
+            R.id.itemDeconnect -> {
+               finish()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
 
 
     }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        menuInflater.inflate(R.menu.listemenu, menu)
+        super.onCreateContextMenu(menu, v, menuInfo)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.menuInfo as ContextMenu.ContextMenuInfo
+        val position = info.position
+        when(item.itemId){
+            R.id.itemshow -> {
+                Toast.makeText(this,${position}, Toast.LENGTH_SHORT).show()
+            }
+            R.id.itemsupp -> {
+                Toast.makeText(this, "Supprimer", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        return super.onContextItemSelected(item)
+    }
+
 }

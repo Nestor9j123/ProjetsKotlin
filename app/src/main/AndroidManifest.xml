@@ -13,13 +13,18 @@
         android:theme="@style/Theme.Base"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".PostdetailActivity2"
             android:exported="true"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/accueil_name"
+            android:label="@string/connexion_name"
+            android:parentActivityName=".HomeActivity"
+
             />
 
-
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:label="@string/accueil_name" >
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
