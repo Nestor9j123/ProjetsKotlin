@@ -7,12 +7,11 @@ import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuItemImpl
 
 class HomeActivity : AppCompatActivity() {
     lateinit var liste: ListView
@@ -92,7 +91,7 @@ class HomeActivity : AppCompatActivity() {
             }
 
             R.id.itemDeconnect -> {
-               finish()
+               deconnexion()
             }
         }
 
@@ -106,27 +105,28 @@ class HomeActivity : AppCompatActivity() {
         v: View?,
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
-        menuInflater.inflate(R.menu.listemenu, menu)
+        menuInflater.inflate(R.menu.listepopup, menu)
         super.onCreateContextMenu(menu, v, menuInfo)
     }
 
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
-        val position = info.position
-        when(item.itemId){
-            R.id.itemshow -> {
-                val intent = Intent(this, PostdetailActivity2::class.java)
-                intent.putExtra("titre", postearray[position].titre)
-                startActivity(intent)
-            }
-            R.id.itemsupp -> {
-               postearray.removeAt(position)
-                adapter.notifyDataSetChanged()
-            }
-
-
+    fun deconnexion(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirmation")
+        builder.setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
+        builder.setPositiveButton("Oui") { dialog, which ->
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
-        return super.onContextItemSelected(item)
+        builder.setNegativeButton("Non") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.setNeutralButton("Annuler") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val alert = builder.create()
+        alert.show()
     }
+
 
 }
