@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.base.data.Post
 
 class HomeActivity : AppCompatActivity() {
     lateinit var liste: ListView
@@ -114,6 +115,9 @@ class HomeActivity : AppCompatActivity() {
         builder.setTitle("Confirmation")
         builder.setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
         builder.setPositiveButton("Oui") { dialog, which ->
+            val editor = getSharedPreferences("app_state", MODE_PRIVATE).edit()
+            editor.putBoolean("authentification", false)
+            editor.apply()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

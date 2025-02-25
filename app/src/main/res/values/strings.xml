@@ -2,6 +2,8 @@
     <string name="app_name">FoodQuick</string>
     <string name="accueil_name">Acceuil</string>
     <string name="connexion_name">Page de post</string>
+    <string name="inscription_name">Inscription</string>
+
 
 
     <string-array name="poste">
