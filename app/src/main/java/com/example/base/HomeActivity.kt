@@ -7,6 +7,7 @@ import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +17,7 @@ import androidx.appcompat.view.menu.MenuItemImpl
 class HomeActivity : AppCompatActivity() {
     lateinit var liste: ListView
     var postearray = ArrayList<Post>()
+    lateinit var adapter: PostsAdapter
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         val liste = findViewById<ListView>(R.id.listePoste)
 
         // Liste des postes
-        val postearray = arrayListOf(
+        postearray = arrayListOf(
             Post(
                 "Titre1",
                 "Une descritption du post 1 en bas de cette page est une bonne pratique",
@@ -57,8 +59,8 @@ class HomeActivity : AppCompatActivity() {
         )
 
         // Utilisation du PostsAdapter personnalisé
-        val adapt = PostsAdapter(this, R.layout.itempost, postearray)
-        liste.adapter = adapt
+         adapter = PostsAdapter(this, R.layout.itempost, postearray)
+        liste.adapter = adapter
 
         liste.setOnItemClickListener { parent, view, position, id ->
             val poste = postearray[position]
@@ -109,15 +111,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        val info = item.menuInfo as ContextMenu.ContextMenuInfo
+        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
         val position = info.position
         when(item.itemId){
             R.id.itemshow -> {
-                Toast.makeText(this,${position}, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, PostdetailActivity2::class.java)
+                intent.putExtra("titre", postearray[position].titre)
+                startActivity(intent)
             }
             R.id.itemsupp -> {
-                Toast.makeText(this, "Supprimer", Toast.LENGTH_SHORT).show()
+               postearray.removeAt(position)
+                adapter.notifyDataSetChanged()
             }
+
 
         }
         return super.onContextItemSelected(item)
