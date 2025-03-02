@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         sharerepref = getSharedPreferences("app_state", MODE_PRIVATE)
         db = facebookdatabase(this, null)
-
         val authentification = sharerepref.getBoolean("authentification", false)
         val emailShared = sharerepref.getString("email", "")
         if (authentification) {

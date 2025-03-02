@@ -22,15 +22,15 @@
         app:srcCompat="@drawable/facebook" />
 
     <EditText
-        android:layout_marginRight="15dp"
         android:id="@+id/editTextText"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="102dp"
+        android:layout_marginRight="15dp"
         android:background="#FFFFFFFF"
         android:ems="10"
         android:hint="Votre Nom"
-        android:layout_marginLeft="20dp"
         android:inputType="text"
         android:paddingLeft="15dp"
         android:textColorHint="#000000"
@@ -42,17 +42,17 @@
 
     <EditText
         android:id="@+id/editTextText2"
-        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="471dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="471dp"
         android:background="#FFFFFFFF"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
-        android:hint="Email"
         android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,12 +60,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
     <EditText
-        android:layout_marginRight="15dp"
         android:id="@+id/editTextTextPassword"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="398dp"
         android:background="#FFFFFFFF"
         android:ems="10"
@@ -80,11 +80,11 @@
 
     <EditText
         android:id="@+id/editTextTextPassword2"
-        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_marginRight="15dp"
         android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="320dp"
         android:background="#FFFFFFFF"
         android:ems="10"
@@ -101,11 +101,11 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_marginRight="15dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="257dp"
+        android:layout_marginRight="15dp"
         android:layout_marginBottom="25dp"
         android:text="Enregistrer"
         android:textColor="#FFFFFF"
@@ -117,19 +117,22 @@
 
     <TextView
         android:id="@+id/textViews"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="208dp"
         android:layout_marginBottom="212dp"
         android:text="TextView"
         android:textColor="#F11000"
+        android:visibility="gone"
+
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2"
+        app:layout_constraintVertical_bias="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

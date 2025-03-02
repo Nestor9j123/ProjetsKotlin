@@ -4,21 +4,4 @@
     <string name="connexion_name">Page de post</string>
     <string name="inscription_name">Inscription</string>
 
-
-
-    <string-array name="poste">
-        <item>Poste1</item>
-        <item>Poste2</item>
-        <item>Poste3</item>
-        <item>Poste4</item>
-        <item>Poste5</item>
-        <item>Poste6</item>
-        <item>Poste7</item>
-        <item>Poste8</item>
-        <item>Poste9</item>
-        <item>Poste10</item>
-        <item>Poste11</item>
-        <item>Poste12</item>
-
-    </string-array>
 </resources>

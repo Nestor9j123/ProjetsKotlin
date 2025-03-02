@@ -13,12 +13,13 @@
         android:theme="@style/Theme.Base"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".UsersActivity"
             android:exported="true"
             android:label="@string/inscription_name"
-            android:parentActivityName=".MainActivity"
-            />
-
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PostdetailActivity2"
             android:exported="true"
@@ -27,7 +28,7 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:label="@string/accueil_name"></activity>
+            android:label="@string/accueil_name" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

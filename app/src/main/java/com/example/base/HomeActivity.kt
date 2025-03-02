@@ -3,21 +3,25 @@ package com.example.base
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.base.data.Post
+import com.example.base.db.facebookdatabase
 
 class HomeActivity : AppCompatActivity() {
     lateinit var liste: ListView
     var postearray = ArrayList<Post>()
     lateinit var adapter: PostsAdapter
+    lateinit var db: facebookdatabase
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,46 +30,27 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         val email = intent.getStringExtra("email")
+        db = facebookdatabase(this, null)
+        liste = findViewById(R.id.listePoste)
 
-        val liste = findViewById<ListView>(R.id.listePoste)
 
-        // Liste des postes
-        postearray = arrayListOf(
-            Post(
-                "Titre1",
-                "Une descritption du post 1 en bas de cette page est une bonne pratique",
-                R.drawable.img1
-            ),
-            Post(
-                "Titre2",
-                "Une descritption du post 2 en bas de cette page est une bonne pratique",
-                R.drawable.img2
-            ),
-            Post(
-                "Titre3",
-                "Une descritption du post 3 en bas de cette page est une bonne pratique",
-                R.drawable.img3
-            ),
-            Post(
-                "Titre4",
-                "Une descritption du post 4 en bas de cette page est une bonne pratique",
-                R.drawable.img4
-            ),
-            Post(
-                "Titre5",
-                "Une descritption du post 5 en bas de cette page est une bonne pratique",
-                R.drawable.img5
-            ),
-        )
+    }
+    override fun onResume() {
+        super.onResume()
+        val emptyView = findViewById<TextView>(R.id.emptyView)
+        liste.emptyView = emptyView
 
-        // Utilisation du PostsAdapter personnalisé
-         adapter = PostsAdapter(this, R.layout.itempost, postearray)
+        // Récupération des posts
+        postearray = db.getAllPosts()
+        Log.d("DEBUG", "Nombre de posts récupérés : ${postearray.size}")
+        adapter = PostsAdapter(this, R.layout.itempost, postearray)
         liste.adapter = adapter
 
-        liste.setOnItemClickListener { parent, view, position, id ->
-            val poste = postearray[position]
+
+        liste.setOnItemClickListener { _, _, position, _ ->
+            val post = postearray[position]
             val intent = Intent(this, PostdetailActivity2::class.java)
-            intent.putExtra("titre", poste.titre)
+            intent.putExtra("titre", post.titre)
             startActivity(intent)
         }
         registerForContextMenu(liste)
@@ -82,7 +67,8 @@ class HomeActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.itemAdd -> {
-                Toast.makeText(this, "Ajouter", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
 
             }
 
@@ -120,6 +106,7 @@ class HomeActivity : AppCompatActivity() {
             editor.apply()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
         builder.setNegativeButton("Non") { dialog, which ->
             dialog.dismiss()
